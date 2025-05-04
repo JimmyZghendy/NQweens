@@ -111,6 +111,7 @@ def get_best_move(board):
             best_move = (i, j)
     
     return best_move
+
 def draw_board(canvas, board):
     global queen_photo
     n = board.shape[0]
@@ -140,6 +141,9 @@ def draw_board(canvas, board):
 def on_board_click(event):
     global board, turn, canvas, ChessN, n
 
+    if np.sum(board) == n:  # Game already over
+        return
+
     col = event.x // 50
     row = event.y // 50
 
@@ -158,7 +162,7 @@ def on_board_click(event):
                 show_game_over_dialog("The position is unsafe. Try again.")
     else:
         show_game_over_dialog("No more queens left to place!")
-
+        
 def show_game_over_dialog(message):
     global ChessN, n
     result = messagebox.askretrycancel("Game Over", message, icon='error')

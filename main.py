@@ -172,11 +172,17 @@ def reset_game():
     canvas.delete('all')
     draw_board(canvas, board)
 
-
 def ai_move():
     global board, turn, canvas, n
 
     move = get_best_move(board)
+    if move is None:  # No valid moves left
+        if np.sum(board) == n:
+            messagebox.showinfo("Game Over", "All queens placed successfully!")
+        else:
+            messagebox.showinfo("Game Over", "No safe positions left!")
+        return
+    
     row, col = move
     board[row, col] = 1
     draw_board(canvas, board)

@@ -89,17 +89,28 @@ def minimax(board, depth, alpha, beta, is_maximizing_player):
 def get_best_move(board):
     best_score = float('-inf')
     best_move = None
+    valid_moves = []
+    
+    # First collect all valid moves
     for i in range(board.shape[0]):
         for j in range(board.shape[1]):
             if board[i, j] == 0 and is_safe(board, i, j):
-                board[i, j] = 1
-                score = minimax(board, 3, float('-inf'), float('inf'), False)
-                board[i, j] = 0
-                if score > best_score:
-                    best_score = score
-                    best_move = (i, j)
+                valid_moves.append((i, j))
+    
+    # If no valid moves, return None
+    if not valid_moves:
+        return None
+    
+    # Evaluate each valid move
+    for i, j in valid_moves:
+        board[i, j] = 1
+        score = minimax(board, 3, float('-inf'), float('inf'), False)
+        board[i, j] = 0
+        if score > best_score:
+            best_score = score
+            best_move = (i, j)
+    
     return best_move
-queen_photo = None
 def draw_board(canvas, board):
     global queen_photo
     n = board.shape[0]

@@ -10,7 +10,7 @@ import numpy as np
 import time
 
 from board import Board
-from alpabeta import AlphaBetaAI
+from alphabeta.alphabeta import AlphaBetaAI
 
 class NQueensGUI:
     def __init__(self, root):

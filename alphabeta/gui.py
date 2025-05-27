@@ -4,13 +4,12 @@ This module contains the graphical user interface for the N-Queens game.
 """
 import os
 import tkinter as tk
-from tkinter import messagebox, simpledialog, ttk
+from tkinter import messagebox, simpledialog
 from PIL import ImageTk, Image
 import numpy as np
-import time
 
 from board import Board
-from alphabeta.alphabeta import AlphaBetaAI
+from alphabeta import AlphaBetaAI
 
 class NQueensGUI:
     def __init__(self, root):
